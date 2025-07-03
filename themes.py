@@ -18,13 +18,16 @@ def print_duties():
         print("{0}\n".format(duty))
 
 def write_duties():
-    open("file.txt", "x")
+    with open("file.txt", "x") as file:
+        for duty in duty_list:
+            file.write("{0}\n".format(duty))
     
 
 if __name__=="__main__":
     choice = input("""
     Welcome to apprentice themes!\n
     Press (1) to list all the duties\n
+    Press (2) to create a file that lists all the duties\n               
     Enter your choice:
     """)
     if choice == '1':

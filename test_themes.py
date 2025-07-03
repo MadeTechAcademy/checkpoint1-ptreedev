@@ -12,7 +12,11 @@ def test_print_duties_prints_all_duties():
 
 
 def test_write_duties_creates_file():
-    with patch("themes.open", mock_open(), create=True) as open_mock:
+    with patch("builtins.open", mock_open(), create=True) as open_mock:
         write_duties()
     assert open_mock.call_count == 1
-    open_mock.assert_called_with("file.txt", "x")
+    open_mock.assert_called_with("file.txt", "w")
+    for duty in duty_list:
+        open_mock.return_value.write.assert_any_call("{0}\n".format(duty))
+
+
