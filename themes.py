@@ -13,21 +13,42 @@ duty_list = [
     "Duty 12 Look to automate any manual tasks that are repeated, often using APIs.",
     "Duty 13 Accept ownership of changes; embody the DevOps culture of 'you build it, you run it', with a relentless focus on the user experience.",
 ]
+
 def print_duties():
     for duty in duty_list:
         print("{0}\n".format(duty))
 
+def format_html():
+    lines = [
+        "<html>",
+        "    <head>",
+        "        <meta charset=\"UTF-8\"/>",
+        "        <title>Apprenticeship Duties</title>",
+        "    </head>",
+        "    <body>",
+        "        <h1>Apprenticeship Duties</h1>",
+        "        <ol>"
+    ]
+    for duty in duty_list:
+        lines.append(f"            <li>{duty}</li>")
+    lines.extend([
+        "        </ol>",
+        "    </body>",
+        "</html>"
+    ])
+    return "\n".join(lines)
+
 def write_duties():
-    with open("file.txt", "x") as file:
-        for duty in duty_list:
-            file.write("{0}\n".format(duty))
+    with open("file.html", "w") as file:
+        duties_html = format_html()
+        file.write(duties_html)
     
 
 if __name__=="__main__":
     choice = input("""
     Welcome to apprentice themes!\n
     Press (1) to list all the duties\n
-    Press (2) to create a file that lists all the duties\n               
+    Press (2) to create a file that lists all the duties\n       
     Enter your choice:
     """)
     if choice == '1':
