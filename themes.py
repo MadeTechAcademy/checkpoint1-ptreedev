@@ -14,9 +14,15 @@ duty_list = [
     "Duty 13 Accept ownership of changes; embody the DevOps culture of 'you build it, you run it', with a relentless focus on the user experience.",
 ]
 
-def print_duties():
-    for duty in duty_list:
-        print("{0}\n".format(duty))
+def print_duties(option):
+    if option == 3:
+        print(duty_list[8])
+    elif option == 4:
+        specific_duties_index = [0, 1, 2, 3, 12]
+        [print(duty_list[i]) for i in specific_duties_index]
+    else: 
+        for duty in duty_list:
+            print("{0}\n".format(duty))
 
 def format_html():
     lines = [
@@ -52,6 +58,10 @@ if __name__=="__main__":
     Enter your choice:
     """)
     if choice == '1':
-        print_duties()
+        print_duties(1)
     elif choice == '2':
         write_duties()
+    elif choice == '3':
+        print_duties(3)
+    elif choice == '4':
+        print_duties(4)
