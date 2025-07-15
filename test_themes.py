@@ -1,5 +1,5 @@
 from unittest.mock import patch, mock_open, call
-from themes import print_duties, duty_list, write_duties, format_html, duty_dict
+from themes import print_duties, write_duties, format_html, duty_dict
 
 # are the tests and naming conventions verbose?
 # def format_test_html():
