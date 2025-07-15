@@ -1,27 +1,6 @@
 from unittest.mock import patch, mock_open, call
 from themes import print_duties, write_duties, format_html, duty_dict
 
-# are the tests and naming conventions verbose?
-# def format_test_html():
-#     expected_lines = [
-#         "<html>",
-#         "    <head>",
-#         "        <meta charset=\"UTF-8\"/>",
-#         "        <title>Apprenticeship Duties</title>",
-#         "    </head>",
-#         "    <body>",
-#         "        <h1>Apprenticeship Duties</h1>",
-#         "        <ol>"
-#     ]
-#     expected_lines += [f"            <li>{duty}</li>" for duty in duty_list]
-#     expected_lines += [
-#         "        </ol>",
-#         "    </body>",
-#         "</html>"
-#     ]
-#     expected_html = "\n".join(expected_lines)
-#     return expected_html
-
 def format_test_html():
     expected_lines = [
         "<html>",
