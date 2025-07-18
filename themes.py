@@ -20,6 +20,9 @@ def print_duties(option):
     elif option == 4:
         specific_duties_index = [1, 2, 3, 4, 13]
         [print(duty_dict[i]) for i in specific_duties_index]
+    elif option == 5:
+        specific_duties_index = [5, 7, 10]
+        [print(duty_dict[i]) for i in specific_duties_index]    
     else: 
         for duty in duty_dict.values():
             print("{0}\n".format(duty))

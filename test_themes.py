@@ -44,6 +44,13 @@ def test_opt_boot_camp_prints_duty_1_2_3_4_13():
         calls = [call(duty_dict[1]), call(duty_dict[2]), call(duty_dict[3]), call(duty_dict[4]), call(duty_dict[13])]
         mock_print.assert_has_calls(calls)
 
+def test_opt_Automate_prints_duty_5_7_10():
+    with patch("builtins.print") as mock_print:
+        print_duties(5)
+        assert mock_print.call_count == 3
+        calls = [call(duty_dict[5]),call(duty_dict[7]),call(duty_dict[10])]
+        mock_print.assert_has_calls(calls)
+
 def test_format_html():
     assert format_html() == format_test_html()
 
