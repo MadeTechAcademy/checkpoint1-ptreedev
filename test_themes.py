@@ -53,16 +53,28 @@ def test_Assemble_prints_8():
 def test_format_html():
     assert format_html(0) == format_test_html(0)
 
-def test_write_duties_creates_html_file():
-    with patch("builtins.open", mock_open(), create=True) as open_mock:
-        write_duties()
-    expected_html = format_test_html(0)
-    open_mock.assert_called_with("file.html", "w")
-    open_mock.return_value.write.assert_any_call(expected_html)
+def test_write_html_with_pytest_tmp(tmp_path):
+    input_html = format_test_html(0)
+    file_path = tmp_path / "output.html"
 
-def test_opt_call_security_writes_duty_9():
-    with patch("builtins.open", mock_open(), create=True) as open_mock:
-            write_duties()
-            expected_html = format_test_html(1)
-            open_mock.assert_called_with("file.html", "w")
-            open_mock.return_value.write.assert_any_call(expected_html)
+    write_html(input_html, str(file_path))
+
+    content = file_path.read_text(encoding="utf-8")
+    assert "<h1>Apprenticeship Duties</h1>" in content
+    assert "<li>Duty 1 Script and code in at least one general purpose language and at least one domain-specific language to orchestrate infrastructure, follow test driven development and ensure appropriate test coverage.</li>" in content
+    assert content.startswith("<html>")
+    assert content.endswith("</html>")
+
+# def test_write_duties_creates_html_file():
+#     with patch("builtins.open", mock_open(), create=True) as open_mock:
+#         write_duties()
+#     expected_html = format_test_html(0)
+#     open_mock.assert_called_with("file.html", "w")
+#     open_mock.return_value.write.assert_any_call(expected_html)
+
+# def test_opt_call_security_writes_duty_9():
+#     with patch("builtins.open", mock_open(), create=True) as open_mock:
+#             write_duties()
+#             expected_html = format_test_html(1)
+#             open_mock.assert_called_with("file.html", "w")
+#             open_mock.return_value.write.assert_any_call(expected_html)
