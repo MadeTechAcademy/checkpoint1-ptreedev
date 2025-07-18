@@ -41,11 +41,13 @@ def format_html(option):
     template = env.get_template("duties_template.html")
     rendered = template.render(duties = duty_dict.values())
     return rendered
-    
-def write_duties():
-    with open("file.html", "w") as file:
-        duties_html = format_html(0)
+
+def write_html(html_content, filepath):
+    with open(filepath, "w") as file:
+        duties_html = html_content
         file.write(duties_html)
+# def write_duties():
+    
     
 
 if __name__=="__main__":

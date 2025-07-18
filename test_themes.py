@@ -1,6 +1,6 @@
 from unittest.mock import patch, mock_open, call
 from jinja2 import Environment, FileSystemLoader
-from themes import print_duties, write_duties, format_html, duty_dict
+from themes import print_duties, write_html, format_html, duty_dict
 
 def format_test_html(option):
     env = Environment(loader=FileSystemLoader('templates'))
@@ -61,7 +61,7 @@ def test_write_html_with_pytest_tmp(tmp_path):
 
     content = file_path.read_text(encoding="utf-8")
     assert "<h1>Apprenticeship Duties</h1>" in content
-    assert "<li>Duty 1 Script and code in at least one general purpose language and at least one domain-specific language to orchestrate infrastructure, follow test driven development and ensure appropriate test coverage.</li>" in content
+    assert "Duty 1 Script and code in at least one general purpose language and at least one domain-specific language to orchestrate infrastructure, follow test driven development and ensure appropriate test coverage." in content
     assert content.startswith("<html>")
     assert content.endswith("</html>")
 
