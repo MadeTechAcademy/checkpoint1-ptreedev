@@ -34,7 +34,7 @@ def print_duties(option):
         for duty in duty_dict.values():
             print("{0}\n".format(duty))
 
-def format_html():
+def format_html(option):
     lines = [
         "<html>",
         "    <head>",
@@ -56,7 +56,7 @@ def format_html():
 
 def write_duties():
     with open("file.html", "w") as file:
-        duties_html = format_html()
+        duties_html = format_html(0)
         file.write(duties_html)
     
 
