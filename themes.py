@@ -22,7 +22,14 @@ def print_duties(option):
         [print(duty_dict[i]) for i in specific_duties_index]
     elif option == 5:
         specific_duties_index = [5, 7, 10]
+        [print(duty_dict[i]) for i in specific_duties_index]
+    elif option == 6:
+        specific_duties_index = [6, 7, 10, 12]
         [print(duty_dict[i]) for i in specific_duties_index]    
+    elif option == 7:
+         print(duty_dict[11])
+    elif option == 8:
+        print(duty_dict[8])      
     else: 
         for duty in duty_dict.values():
             print("{0}\n".format(duty))

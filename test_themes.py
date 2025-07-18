@@ -51,6 +51,25 @@ def test_opt_Automate_prints_duty_5_7_10():
         calls = [call(duty_dict[5]),call(duty_dict[7]),call(duty_dict[10])]
         mock_print.assert_has_calls(calls)
 
+def test_opt_Houston_prints_6_7_10_12():
+    with patch("builtins.print") as mock_print:
+        print_duties(6)
+        assert mock_print.call_count == 4
+        calls = [call(duty_dict[6]),call(duty_dict[7]),call(duty_dict[10]), call(duty_dict[12])]
+        mock_print.assert_has_calls(calls)
+
+def test_going_deeper_prints_11():
+    with patch("builtins.print") as mock_print:
+        print_duties(7)
+        assert mock_print.call_count == 1
+        mock_print.assert_called_once_with(duty_dict[11])
+
+def test_Assemble_prints_8():
+    with patch("builtins.print") as mock_print:
+        print_duties(8)
+        assert mock_print.call_count == 1
+        mock_print.assert_called_once_with(duty_dict[8])
+
 def test_format_html():
     assert format_html() == format_test_html()
 
