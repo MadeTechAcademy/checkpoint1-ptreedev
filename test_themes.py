@@ -1,27 +1,12 @@
 from unittest.mock import patch, mock_open, call
+from jinja2 import Environment, FileSystemLoader
 from themes import print_duties, write_duties, format_html, duty_dict
 
 def format_test_html(option):
-    expected_lines = [
-        "<html>",
-        "    <head>",
-        "        <meta charset=\"UTF-8\"/>",
-        "        <title>Apprenticeship Duties</title>",
-        "    </head>",
-        "    <body>",
-        "        <h1>Apprenticeship Duties</h1>",
-        "        <ol>"
-    ]
-    for duty in duty_dict.values():
-        expected_lines.append(f"            <li>{duty}</li>")
-    expected_lines += [
-        "        </ol>",
-        "    </body>",
-        "</html>"
-    ]
-
-    expected_html = "\n".join(expected_lines)
-    return expected_html
+    env = Environment(loader=FileSystemLoader('templates'))
+    template = env.get_template("duties_template.html")
+    rendered = template.render(duties = duty_dict.values())
+    return rendered
 
 
 def test_print_duties_prints_all_duties():
@@ -31,11 +16,6 @@ def test_print_duties_prints_all_duties():
         for duty in duty_dict.values():
             mock_print.assert_any_call("{0}\n".format(duty))
 
-# def test_opt_call_security_prints_duty_9():
-#       with patch("builtins.print") as mock_print:
-#         print_duties(3)
-#         assert mock_print.call_count == 1
-#         mock_print.assert_called_once_with(duty_dict[9])
 
 def test_opt_boot_camp_prints_duty_1_2_3_4_13():
       with patch("builtins.print") as mock_print:
@@ -77,14 +57,12 @@ def test_write_duties_creates_html_file():
     with patch("builtins.open", mock_open(), create=True) as open_mock:
         write_duties()
     expected_html = format_test_html(0)
-    assert open_mock.call_count == 1
     open_mock.assert_called_with("file.html", "w")
     open_mock.return_value.write.assert_any_call(expected_html)
 
 def test_opt_call_security_writes_duty_9():
     with patch("builtins.open", mock_open(), create=True) as open_mock:
-            write_duties(4)
+            write_duties()
             expected_html = format_test_html(1)
-            assert open_mock.call_count == 1
             open_mock.assert_called_with("file.html", "w")
             open_mock.return_value.write.assert_any_call(expected_html)

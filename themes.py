@@ -1,3 +1,4 @@
+from jinja2 import Environment, FileSystemLoader
 duty_dict = {
     1: "Duty 1 Script and code in at least one general purpose language and at least one domain-specific language to orchestrate infrastructure, follow test driven development and ensure appropriate test coverage.",
     2: "Duty 2 Initiate and facilitate knowledge sharing and technical collaboration with teams and individuals, with a focus on supporting development of team members.",
@@ -34,26 +35,13 @@ def print_duties(option):
         for duty in duty_dict.values():
             print("{0}\n".format(duty))
 
-def format_html(option):
-    lines = [
-        "<html>",
-        "    <head>",
-        "        <meta charset=\"UTF-8\"/>",
-        "        <title>Apprenticeship Duties</title>",
-        "    </head>",
-        "    <body>",
-        "        <h1>Apprenticeship Duties</h1>",
-        "        <ol>"
-    ]
-    for duty in duty_dict.values():
-        lines.append(f"            <li>{duty}</li>")
-    lines.extend([
-        "        </ol>",
-        "    </body>",
-        "</html>"
-    ])
-    return "\n".join(lines)
 
+def format_html(option):
+    env = Environment(loader=FileSystemLoader('templates'))
+    template = env.get_template("duties_template.html")
+    rendered = template.render(duties = duty_dict.values())
+    return rendered
+    
 def write_duties():
     with open("file.html", "w") as file:
         duties_html = format_html(0)
