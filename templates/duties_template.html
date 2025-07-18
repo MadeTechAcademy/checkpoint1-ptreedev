@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <meta charset=\"UTF-8\"/>
+        <title>Apprenticeship Duties</title>",
+    </head>
+    <body>
+        <h1>Apprenticeship Duties</h1>
+        <ol>{% for duty in duties %}
+            <li>
+                {{ duty }}
+            </li>{% endfor %}
+        </ol>
+    </body>
+</html>
