@@ -2,7 +2,7 @@ from unittest.mock import patch, mock_open, call
 from jinja2 import Environment, FileSystemLoader
 from themes import print_duties, write_html, format_html, duty_dict
 
-def format_test_html(option):
+def format_test_html():
     env = Environment(loader=FileSystemLoader('templates'))
     template = env.get_template("duties_template.html")
     rendered = template.render(duties = duty_dict.values())
@@ -51,10 +51,10 @@ def test_Assemble_prints_8():
         mock_print.assert_called_once_with(duty_dict[8])
 
 def test_format_html():
-    assert format_html(0) == format_test_html(0)
+    assert format_html() == format_test_html()
 
 def test_write_html_with_pytest_tmp(tmp_path):
-    input_html = format_test_html(0)
+    input_html = format_test_html()
     file_path = tmp_path / "output.html"
 
     write_html(input_html, str(file_path))

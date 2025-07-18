@@ -36,7 +36,7 @@ def print_duties(option):
             print("{0}\n".format(duty))
 
 
-def format_html(option):
+def format_html():
     env = Environment(loader=FileSystemLoader('templates'))
     template = env.get_template("duties_template.html")
     rendered = template.render(duties = duty_dict.values())
@@ -46,7 +46,10 @@ def write_html(html_content, filepath):
     with open(filepath, "w") as file:
         duties_html = html_content
         file.write(duties_html)
-# def write_duties():
+
+def write_duties():
+    html_content = format_html()
+    write_html(html_content, "file.html")
     
     
 
